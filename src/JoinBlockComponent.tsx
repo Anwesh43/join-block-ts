@@ -13,7 +13,7 @@ const JoinBlockComponent = (props : JBCProps) => {
     const {parentStyle, lineStyle, blockStyle} = useStyle(w, h, scale) 
     return (
         <React.Fragment>
-            <div style ={parentStyle()}>
+            <div style ={parentStyle()} onClick = {() => onClick()}>
                 {[0, 1].map(i => (<div style = {blockStyle(i)} key = {`block_${i}`}></div>))}
                 <div style = {lineStyle()}></div>
             </div>

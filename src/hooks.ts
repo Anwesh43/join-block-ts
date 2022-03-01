@@ -47,10 +47,11 @@ export const useDimension = () => {
 
 const maxScale = (scale : number, i : number, n : number) : number => Math.max(0, scale - i / n)
 const divideScale = (scale : number, i : number, n : number) : number => Math.min(1 / n, maxScale(scale, i, n)) * n 
-
+const sinify = (scale : number) : number => Math.sin(scale * Math.PI)
 export const useStyle = (w : number, h : number, scale : number) => {
-    const sc1 : number = divideScale(scale, 0, 2)
-    const sc2 : number = divideScale(scale, 1, 2)
+    const sf : number = sinify(scale)
+    const sc1 : number = divideScale(sf, 0, 2)
+    const sc2 : number = divideScale(sf, 1, 2)
     const position = 'absolute'
     const size : number = Math.min(w, h) / 11.2 
     const background = `indigo`
@@ -79,11 +80,12 @@ export const useStyle = (w : number, h : number, scale : number) => {
             }
         }, 
         lineStyle() : CSSProperties  {
-            const lineWidth = `${Math.min(w, h) / 90}px`
+            const lineWidth = Math.min(w, h) / 90
+            console.log("lineWidth", lineWidth)
             const width = `${size * sc1}px`
             const height = `${lineWidth}px`
             const left = `${-size * 0.5 * sc1}px`
-            const top = `${lineWidth}px`
+            const top = `0px`
             return {
                 position, 
                 left, 
